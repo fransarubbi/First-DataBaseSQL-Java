@@ -16,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -326,11 +325,32 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        cantPersonas = new javax.swing.JTextField();
+        cantCuadriculas = new javax.swing.JTextField();
+        cantObjetos = new javax.swing.JTextField();
+        cantCajas = new javax.swing.JTextField();
         contarCantidades = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tablaArqueologos = new javax.swing.JTable();
+        jMostrarArqueologos = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tablaCajasVacias = new javax.swing.JTable();
+        mostrarCajasVacias = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        maxPeso = new javax.swing.JTextField();
+        minPeso = new javax.swing.JTextField();
+        medPeso = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        tablaPesoCajas = new javax.swing.JTable();
+        jLabel35 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Base de Datos Arqueologia");
@@ -344,6 +364,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        jTablaSitios.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaSitios.setForeground(new java.awt.Color(255, 255, 255));
         jTablaSitios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -364,6 +386,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTablaSitios.getAccessibleContext().setAccessibleName("");
         jTablaSitios.getAccessibleContext().setAccessibleDescription("");
 
+        jTablaCuadriculas.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaCuadriculas.setForeground(new java.awt.Color(255, 255, 255));
         jTablaCuadriculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -385,6 +409,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTablaCuadriculas);
 
+        jTablaCajas.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaCajas.setForeground(new java.awt.Color(255, 255, 255));
         jTablaCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -406,6 +432,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTablaCajas);
 
+        jTablaObjetos.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaObjetos.setForeground(new java.awt.Color(255, 255, 255));
         jTablaObjetos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -427,6 +455,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jTablaObjetos);
 
+        jTablaPersonas.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaPersonas.setForeground(new java.awt.Color(255, 255, 255));
         jTablaPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -448,6 +478,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTablaPersonas);
 
+        jTablaCeramicos.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaCeramicos.setForeground(new java.awt.Color(255, 255, 255));
         jTablaCeramicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -469,6 +501,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(jTablaCeramicos);
 
+        jTablaLiticos.setBackground(new java.awt.Color(51, 51, 51));
+        jTablaLiticos.setForeground(new java.awt.Color(255, 255, 255));
         jTablaLiticos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -510,7 +544,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane5))
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,10 +567,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Informacion", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DNI Ingresa:");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre Objeto:");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Codigo Objeto:");
 
         jInsertarObjeto.setText("Insertar");
@@ -546,33 +586,51 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tipo Extraccion:");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Alto:");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Espesor:");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Largo:");
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Peso:");
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Cantidad:");
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Fecha Registro:");
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Descripcion:");
 
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Origen:");
 
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Cod Cuad Asociado:");
 
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Cod Cajas Contiene:");
 
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Es:");
 
         fechaRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechaRegistroActionPerformed(evt);
+            }
+        });
+
+        codCajaContiene.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codCajaContieneActionPerformed(evt);
             }
         });
 
@@ -594,7 +652,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel16))))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombreObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -610,14 +668,6 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(fechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel14))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(codCuadAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(codCajaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(descripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,9 +684,19 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(peso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jInsertarObjeto, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(es, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(341, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codCuadAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(codCajaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(es, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jInsertarObjeto)))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,29 +734,32 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(largo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(espesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
                     .addComponent(codCuadAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
                     .addComponent(jLabel1)
-                    .addComponent(codCajaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dniIngresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(dniIngresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(codCajaContiene, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(es, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(es, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jInsertarObjeto)
-                .addGap(27, 27, 27))
+                    .addComponent(jInsertarObjeto))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Insertar Objeto", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Codigo de la Caja a eliminar:");
 
         jbEliminar.setText("Eliminar");
@@ -706,12 +769,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        mostrarCajas.setBackground(new java.awt.Color(51, 51, 51));
+        mostrarCajas.setForeground(new java.awt.Color(255, 255, 255));
         mostrarCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Caja", "Fecha Caja", "Lugar Caja"
@@ -727,6 +789,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(mostrarCajas);
 
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Toque el boton Mostrar para ver las cajas cargadas");
 
         jMostrarCajas.setText("Mostrar");
@@ -754,7 +817,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jMostrarCajas))
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(523, Short.MAX_VALUE))
+                .addContainerGap(593, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -776,8 +839,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Eliminar Caja", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Ingrese el codigo de la caja:");
 
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Toque el boton Mostrar para ver las cajas cargadas");
 
         jMostrarCajas1.setText("Mostrar");
@@ -793,12 +861,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        mostrarCajas2.setBackground(new java.awt.Color(51, 51, 51));
+        mostrarCajas2.setForeground(new java.awt.Color(255, 255, 255));
         mostrarCajas2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Caja", "Fecha Caja", "Lugar Caja"
@@ -821,12 +888,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        tablaObjetosMostrar.setBackground(new java.awt.Color(51, 51, 51));
+        tablaObjetosMostrar.setForeground(new java.awt.Color(255, 255, 255));
         tablaObjetosMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo Obj", "Nombre Obj", "TipoExt Obj", "Alto Obj", "Largo Obj", "Espesor Obj", "Peso Obj", "Cantidad Obj", "FechaReg Obj", "Descripcion Obj", "Origen Obj", "Cuad Codigo", "Cajas Codigo", "DNI Ingresa", "Es"
@@ -862,12 +928,12 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(buscarCajaMostrar))
                             .addComponent(jLabel19)
                             .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(66, 66, 66)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(185, Short.MAX_VALUE)))
+                    .addContainerGap(255, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -893,8 +959,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Obtener Objetos", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Fecha Inferior:");
 
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Fecha Superior:");
 
         buscarFechas.setText("Buscar");
@@ -904,12 +975,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        objetoMostrarFechas.setBackground(new java.awt.Color(51, 51, 51));
+        objetoMostrarFechas.setForeground(new java.awt.Color(255, 255, 255));
         objetoMostrarFechas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Codigo Objeto", "Nombre Objeto"
@@ -925,8 +995,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane11.setViewportView(objetoMostrarFechas);
 
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("dd-mm-aaaa");
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("dd-mm-aaaa");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -988,8 +1060,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Obtener Objetos Fechas", jPanel5);
 
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Cantidad de Litico:");
 
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Cantidad de Ceramico:");
 
         contarLitCer.setText("Contar");
@@ -1015,7 +1092,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcantidadLiticos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcantidadCeramicos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addContainerGap(644, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1035,12 +1112,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cantidad Lit y Cer", jPanel6);
 
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Cantidad de Personas:");
 
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Cantidad de Objetos:");
 
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Cantidad de Cuadriculas:");
 
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Cantidad de Cajas:");
 
         contarCantidades.setText("Cantidades");
@@ -1062,13 +1145,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel27)
                     .addComponent(jLabel29))
                 .addGap(90, 90, 90)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(contarCantidades)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(584, Short.MAX_VALUE))
+                    .addComponent(cantPersonas, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                    .addComponent(cantCuadriculas)
+                    .addComponent(cantObjetos)
+                    .addComponent(cantCajas))
+                .addContainerGap(626, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1076,25 +1159,254 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantObjetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantCajas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addComponent(contarCantidades)
                 .addContainerGap(331, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cantidades", jPanel7);
+
+        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+
+        tablaArqueologos.setBackground(new java.awt.Color(51, 51, 51));
+        tablaArqueologos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaArqueologos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre Arqueologo", "Apellido Arqueologo", "Cantidad Objetos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane12.setViewportView(tablaArqueologos);
+
+        jMostrarArqueologos.setText("Mostrar");
+        jMostrarArqueologos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMostrarArqueologosActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Toque en Mostrar para ver la informacion disponible");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jMostrarArqueologos)))
+                .addContainerGap(320, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jMostrarArqueologos)
+                    .addComponent(jLabel30))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Arqueologos", jPanel8);
+
+        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+
+        tablaCajasVacias.setBackground(new java.awt.Color(51, 51, 51));
+        tablaCajasVacias.setForeground(new java.awt.Color(255, 255, 255));
+        tablaCajasVacias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Caja", "Lugar Caja"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane13.setViewportView(tablaCajasVacias);
+
+        mostrarCajasVacias.setText("Mostrar");
+        mostrarCajasVacias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarCajasVaciasActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Toque en Mostrar para ver la informacion disponible");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mostrarCajasVacias)))
+                .addContainerGap(332, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mostrarCajasVacias)
+                    .addComponent(jLabel31))
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Cajas vacias", jPanel9);
+
+        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("Maximo Peso Objetos:");
+
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Minimo Peso Objetos:");
+
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Peso Medio Objetos:");
+
+        minPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minPesoActionPerformed(evt);
+            }
+        });
+
+        medPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medPesoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Mostrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tablaPesoCajas.setBackground(new java.awt.Color(51, 51, 51));
+        tablaPesoCajas.setForeground(new java.awt.Color(255, 255, 255));
+        tablaPesoCajas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Caja", "Peso"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane14.setViewportView(tablaPesoCajas);
+
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Toque en Mostrar para ver la informacion disponible");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(medPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maxPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(544, 544, 544))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel32)
+                        .addComponent(jLabel33)
+                        .addComponent(jLabel34)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(428, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel35))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel32)
+                    .addComponent(maxPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(minPeso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(medPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(186, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Stats", jPanel10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1444,27 +1756,93 @@ public class MainFrame extends javax.swing.JFrame {
     private void contarCantidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contarCantidadesActionPerformed
         
         try{
-            p_query = conn.prepareStatement("SELECT COUNT(*) AS cantidad_liticos FROM Liticos");
+            String consulta = "SELECT " +
+                           "(SELECT COUNT(*) FROM Personas) AS Cantidad_Personas, " +
+                           "(SELECT COUNT(*) FROM Cuadriculas) AS Cantidad_Cuadriculas, " +
+                           "(SELECT COUNT(*) FROM Objetos) AS Cantidad_Objetos, " +
+                           "(SELECT COUNT(*) FROM Cajas) AS Cantidad_Cajas;";
+            p_query = conn.prepareStatement(consulta);
             result = p_query.executeQuery();
-            if(result.next()){
-                int cantidadLiticos = result.getInt("cantidad_liticos");
-                cantidadLiticos += 1;
-                String cantL = String.valueOf(cantidadLiticos);
-                jcantidadLiticos.setText(cantL);
-            }
-            p_query = conn.prepareStatement("SELECT COUNT(*) AS cantidad_ceramicos FROM Ceramicos");
-            result = p_query.executeQuery();
-            if(result.next()){
-                int cantidadCeramicos = result.getInt("cantidad_ceramicos");
-                cantidadCeramicos += 1;
-                String cantC = String.valueOf(cantidadCeramicos);
-                jcantidadCeramicos.setText(cantC);
+            if (result.next()) {
+                int cantidadPersonas = result.getInt("Cantidad_Personas");
+                int cantidadCuadriculas = result.getInt("Cantidad_Cuadriculas");
+                int cantidadObjetos = result.getInt("Cantidad_Objetos");
+                int cantidadCajas = result.getInt("Cantidad_Cajas");
+
+                cantPersonas.setText(String.valueOf(cantidadPersonas));
+                cantObjetos.setText(String.valueOf(cantidadObjetos));
+                cantCajas.setText(String.valueOf(cantidadCajas));
+                cantCuadriculas.setText(String.valueOf(cantidadCuadriculas));
             }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "ERROR!"); 
         }
         
     }//GEN-LAST:event_contarCantidadesActionPerformed
+
+    private void jMostrarArqueologosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMostrarArqueologosActionPerformed
+        
+        try{
+            String consulta = "SELECT P.P_Nombre, P.P_Apellido, COUNT(O.O_Cod) AS CantidadObjetos " +
+                              "FROM Personas P " +
+                              "LEFT JOIN Objetos O ON P.P_Dni = O.P_Dni_Ingresa " +
+                              "GROUP BY P.P_Dni, P.P_Nombre, P.P_Apellido " +
+                              "ORDER BY P.P_Apellido;";
+            p_query = conn.prepareStatement(consulta);
+            result = p_query.executeQuery();
+            tablaArqueologos.setModel(resultToTable(result));
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "ERROR!");
+        }
+        
+        
+    }//GEN-LAST:event_jMostrarArqueologosActionPerformed
+
+    private void mostrarCajasVaciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCajasVaciasActionPerformed
+        try{
+            String consulta = "SELECT Ca.Ca_Cod, Ca.Ca_Lugar " +
+                              "FROM Cajas Ca " +
+                              "LEFT JOIN Objetos O ON Ca.Ca_Cod = O.Ca_Cod_Contiene " +
+                              "WHERE O.Ca_Cod_Contiene IS NULL;";
+            p_query = conn.prepareStatement(consulta);
+            result = p_query.executeQuery();
+            tablaCajasVacias.setModel(resultToTable(result));
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "ERROR!");
+        }
+    }//GEN-LAST:event_mostrarCajasVaciasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            p_query = conn.prepareStatement("SELECT MAX(O_Peso) AS Max_Peso, MIN(O_Peso) AS Min_Peso, AVG(O_Peso) AS Avg_Peso FROM Objetos");
+            result = p_query.executeQuery();
+            if(result.next()){
+                float maximo = result.getFloat("Max_Peso");
+                float minimo = result.getFloat("Min_Peso");
+                float medio = result.getFloat("Avg_Peso");
+                minPeso.setText(String.valueOf(minimo));
+                medPeso.setText(String.valueOf(medio));
+                maxPeso.setText(String.valueOf(maximo));
+            }
+            p_query = conn.prepareStatement("SELECT Ca_Cod_Contiene, SUM(O_Peso) AS Total_Peso FROM Objetos GROUP BY Ca_Cod_Contiene");
+            result = p_query.executeQuery();
+            tablaPesoCajas.setModel(resultToTable(result));
+        }catch(SQLException e){
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void medPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medPesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_medPesoActionPerformed
+
+    private void minPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minPesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minPesoActionPerformed
+
+    private void codCajaContieneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codCajaContieneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codCajaContieneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1513,6 +1891,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField buscarCaja;
     private javax.swing.JButton buscarCajaMostrar;
     private javax.swing.JButton buscarFechas;
+    private javax.swing.JTextField cantCajas;
+    private javax.swing.JTextField cantCuadriculas;
+    private javax.swing.JTextField cantObjetos;
+    private javax.swing.JTextField cantPersonas;
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField codCajaContiene;
     private javax.swing.JTextField codCuadAsociado;
@@ -1527,6 +1909,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField es;
     private javax.swing.JTextField espesor;
     private javax.swing.JTextField fechaRegistro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jInsertarObjeto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1551,24 +1934,37 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jMostrarArqueologos;
     private javax.swing.JButton jMostrarCajas;
     private javax.swing.JButton jMostrarCajas1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1585,23 +1981,26 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTablaObjetos;
     private javax.swing.JTable jTablaPersonas;
     private javax.swing.JTable jTablaSitios;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JTextField jcantidadCeramicos;
     private javax.swing.JTextField jcantidadLiticos;
     private javax.swing.JTextField largo;
+    private javax.swing.JTextField maxPeso;
+    private javax.swing.JTextField medPeso;
     private javax.swing.JTextField mesInferior;
     private javax.swing.JTextField mesSuperior;
+    private javax.swing.JTextField minPeso;
     private javax.swing.JTable mostrarCajas;
     private javax.swing.JTable mostrarCajas2;
+    private javax.swing.JButton mostrarCajasVacias;
     private javax.swing.JTextField nombreObjeto;
     private javax.swing.JTable objetoMostrarFechas;
     private javax.swing.JTextField origen;
     private javax.swing.JTextField peso;
+    private javax.swing.JTable tablaArqueologos;
+    private javax.swing.JTable tablaCajasVacias;
     private javax.swing.JTable tablaObjetosMostrar;
+    private javax.swing.JTable tablaPesoCajas;
     private javax.swing.JTextField tipoExtraccion;
     // End of variables declaration//GEN-END:variables
 }
