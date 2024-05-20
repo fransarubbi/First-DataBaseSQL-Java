@@ -10,12 +10,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1019,11 +1022,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Objeto", "Nombre Objeto"
+                "Codigo Objeto", "Nombre Objeto", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1692,8 +1695,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarCajaMostrarActionPerformed
 
     private void buscarFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarFechasActionPerformed
+        
         int ok = 0;
-        int conf = 0;
         
         if(!diaInferior.getText().trim().equals("") && !mesInferior.getText().trim().equals("") 
             && !anioInferior.getText().trim().equals("") && !diaSuperior.getText().trim().equals("") 
@@ -1702,70 +1705,29 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         if(ok == 1){
-            int diaI = Integer.parseInt(diaInferior.getText().trim());
-            int mesI = Integer.parseInt(mesInferior.getText().trim());
-            int anioI = Integer.parseInt(anioInferior.getText().trim());
-            int diaS = Integer.parseInt(diaSuperior.getText().trim());
-            int mesS = Integer.parseInt(mesSuperior.getText().trim());
-            int anioS = Integer.parseInt(anioSuperior.getText().trim());
-            
-            if(diaI < 0 || diaS < 0 || mesI < 0 || mesS < 0 || anioI < 0 || anioS < 0){
-                JOptionPane.showMessageDialog(null, "ERROR. Datos incorrectos, verifique!");
+            String diaI = diaInferior.getText().trim();
+            String mesI = mesInferior.getText().trim();
+            String anioI = anioInferior.getText().trim();
+            String diaS = diaSuperior.getText().trim();
+            String mesS = mesSuperior.getText().trim();
+            String anioS = anioSuperior.getText().trim();
+            String fechaInferior = diaI+"-"+mesI+"-"+anioI;
+            String fechaSuperior = diaS+"-"+mesS+"-"+anioS;
+            try{
+                p_query = conn.prepareStatement("SELECT O_Cod, O_Nombre, O_Fecharegistro FROM Objetos WHERE O_Fecharegistro BETWEEN ? AND ?");
+                p_query.setString(1, fechaInferior);
+                p_query.setString(2, fechaSuperior);
+                result = p_query.executeQuery();
+                objetoMostrarFechas.setModel(resultToTable(result));
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "ERROR!");
             }
-            else{
-                if(diaI > 31 || diaS > 31 || mesI > 12 || mesS > 12){
-                    JOptionPane.showMessageDialog(null, "ERROR. Datos incorrectos, verifique!");
-                }
-                else{
-                    if(anioI <= anioS){
-                        if(mesI < mesS){
-                            String fechaInferior = String.valueOf(diaI) + "-" + String.valueOf(mesI) + "-" + String.valueOf(anioI);
-                            String fechaSuperior = String.valueOf(diaS) + "-" + String.valueOf(mesS) + "-" + String.valueOf(anioS);
-                            try{
-                                p_query = conn.prepareStatement("SELECT O_Cod, O_Nombre FROM Objetos WHERE O_Fecharegistro BETWEEN ? AND ?");
-                                p_query.setString(1, fechaInferior);
-                                p_query.setString(2, fechaSuperior);
-                                result = p_query.executeQuery();
-                                objetoMostrarFechas.setModel(resultToTable(result));
-                            }catch(SQLException e){
-                                JOptionPane.showMessageDialog(null, "ERROR!");
-                            }
-                        }
-                        else{
-                            if(mesI == mesS){
-                                if(diaI <= diaS){
-                                    String fechaInferior = String.valueOf(diaI) + "-" + String.valueOf(mesI) + "-" + String.valueOf(anioI);
-                                    String fechaSuperior = String.valueOf(diaS) + "-" + String.valueOf(mesS) + "-" + String.valueOf(anioS);
-                                    try{
-                                        p_query = conn.prepareStatement("SELECT O_Cod, O_Nombre FROM Objetos WHERE O_Fecharegistro BETWEEN ? AND ?");
-                                        p_query.setString(1, fechaInferior);
-                                        p_query.setString(1, fechaSuperior);
-                                        result = p_query.executeQuery();
-                                        objetoMostrarFechas.setModel(resultToTable(result));
-                                    }catch(SQLException e){
-                                        JOptionPane.showMessageDialog(null, "ERROR!");
-                                    }
-                                }
-                                else{
-                                    JOptionPane.showMessageDialog(null, "ERROR. Datos incorrectos, verifique!");
-                                }
-                            }
-                            else{
-                                JOptionPane.showMessageDialog(null, "ERROR. Datos incorrectos, verifique!");
-                            }
-                        }
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "ERROR. Datos incorrectos, verifique!");
-                    }
-                }
-            }
-        }
-        else{
-           JOptionPane.showMessageDialog(null, "ERROR. Ingrese datos por favor!"); 
+        }else{
+            JOptionPane.showMessageDialog(null, "ERROR. Ingrese datos correctos!");
         }
     }//GEN-LAST:event_buscarFechasActionPerformed
 
+    
     private void contarLitCerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contarLitCerActionPerformed
         // TODO add your handling code here:
         try{
