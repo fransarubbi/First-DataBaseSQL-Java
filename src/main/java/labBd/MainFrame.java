@@ -151,8 +151,45 @@ public class MainFrame extends javax.swing.JFrame {
                 }
         
                 try{
-                    query.execute("DELETE FROM Personas WHERE P_Nombre=Benji AND P_Apellido=Colchett");
-                    JOptionPane.showMessageDialog(null, "OK. Se ha dado de baja a Benji Colchett.");
+                    p_query = conn.prepareStatement("SELECT P_Dni FROM Personas WHERE P_Nombre = ? AND P_Apellido = ?");
+                    p_query.setString(1, "Benji");
+                    p_query.setString(2, "Colchett");
+                    result = p_query.executeQuery();
+                    
+                    if (result.next()) {
+                        
+                        int dni = result.getInt("P_Dni");
+                        p_query = conn.prepareStatement("SELECT O_Cod FROM Objetos WHERE P_Dni_Ingresa = ?");
+                        p_query.setInt(1, dni);
+                        result = p_query.executeQuery();
+                        
+                        while (result.next()) {
+                            String o_cod = result.getString("O_Cod");
+
+                            // Eliminar en Liticos
+                            p_query = conn.prepareStatement("DELETE FROM Liticos WHERE O_cod = ?");
+                            p_query.setString(1, o_cod);
+                            p_query.executeUpdate();
+
+                            // Eliminar en Ceramicos
+                            p_query = conn.prepareStatement("DELETE FROM Ceramicos WHERE O_cod = ?");
+                            p_query.setString(1, o_cod);
+                            p_query.executeUpdate();
+                            
+                            //Eliminar Objetos
+                            p_query = conn.prepareStatement("DELETE FROM Objetos WHERE O_Cod = ?");
+                            p_query.setString(1, o_cod);
+                            p_query.executeUpdate();
+                        }
+                        //Eliminar Persona
+                        p_query = conn.prepareStatement("DELETE FROM Personas WHERE P_Nombre = ? AND P_Apellido = ?");
+                        p_query.setString(1, "Benji");
+                        p_query.setString(2, "Colchett");
+                        p_query.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "OK. Se ha dado de baja a Benji Colchett.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR. No se ha encontrado a Benji Colchett.");
+                    }
                 }catch(SQLException e){
                     JOptionPane.showMessageDialog(null, "ERROR. No se ha podido dar de baja a Benji Colchett.");
                 }
@@ -1380,7 +1417,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabel33)
                         .addComponent(jLabel34)
                         .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
