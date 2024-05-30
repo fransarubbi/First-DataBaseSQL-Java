@@ -355,11 +355,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jcantidadCeramicos = new javax.swing.JTextField();
-        jcantidadLiticos = new javax.swing.JTextField();
         contarLitCer = new javax.swing.JButton();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        tablaCantidades = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -1103,12 +1101,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(51, 51, 51));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Cantidad de Litico:");
-
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Cantidad de Ceramico:");
-
         contarLitCer.setText("Contar");
         contarLitCer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1116,38 +1108,45 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        tablaCantidades.setBackground(new java.awt.Color(51, 51, 51));
+        tablaCantidades.setForeground(new java.awt.Color(255, 255, 255));
+        tablaCantidades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo Objeto", "Cantidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane15.setViewportView(tablaCantidades);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(165, 165, 165)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(contarLitCer)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel24))
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcantidadLiticos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcantidadCeramicos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(644, Short.MAX_VALUE))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jcantidadLiticos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jcantidadCeramicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
+                .addGap(62, 62, 62)
                 .addComponent(contarLitCer)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cantidad Lit y Cer", jPanel6);
@@ -1731,22 +1730,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void contarLitCerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contarLitCerActionPerformed
         // TODO add your handling code here:
         try{
-            p_query = conn.prepareStatement("SELECT COUNT(*) AS cantidad_liticos FROM Liticos");
+            p_query = conn.prepareStatement("SELECT O_Es AS tipo_Objeto, COUNT(*) AS cantidad FROM Objetos GROUP BY O_Es");
             result = p_query.executeQuery();
-            if(result.next()){
-                int cantidadLiticos = result.getInt("cantidad_liticos");
-                cantidadLiticos += 1;
-                String cantL = String.valueOf(cantidadLiticos);
-                jcantidadLiticos.setText(cantL);
-            }
-            p_query = conn.prepareStatement("SELECT COUNT(*) AS cantidad_ceramicos FROM Ceramicos");
-            result = p_query.executeQuery();
-            if(result.next()){
-                int cantidadCeramicos = result.getInt("cantidad_ceramicos");
-                cantidadCeramicos += 1;
-                String cantC = String.valueOf(cantidadCeramicos);
-                jcantidadCeramicos.setText(cantC);
-            }
+            tablaCantidades.setModel(resultToTable(result));
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "ERROR!"); 
         }
@@ -1799,10 +1785,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void mostrarCajasVaciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCajasVaciasActionPerformed
         try{
-            String consulta = "SELECT Ca.Ca_Cod, Ca.Ca_Lugar " +
-                              "FROM Cajas Ca " +
-                              "LEFT JOIN Objetos O ON Ca.Ca_Cod = O.Ca_Cod_Contiene " +
-                              "WHERE O.Ca_Cod_Contiene IS NULL;";
+            String consulta = "SELECT Ca_Cod, Ca_Lugar FROM Cajas WHERE Ca_Cod NOT IN (SELECT Ca_Cod_Contiene FROM Objetos)";
             p_query = conn.prepareStatement(consulta);
             result = p_query.executeQuery();
             tablaCajasVacias.setModel(resultToTable(result));
@@ -1926,8 +1909,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1964,6 +1945,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1981,8 +1963,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTablaPersonas;
     private javax.swing.JTable jTablaSitios;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JTextField jcantidadCeramicos;
-    private javax.swing.JTextField jcantidadLiticos;
     private javax.swing.JTextField largo;
     private javax.swing.JTextField maxPeso;
     private javax.swing.JTextField medPeso;
@@ -1998,6 +1978,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField peso;
     private javax.swing.JTable tablaArqueologos;
     private javax.swing.JTable tablaCajasVacias;
+    private javax.swing.JTable tablaCantidades;
     private javax.swing.JTable tablaObjetosMostrar;
     private javax.swing.JTable tablaPesoCajas;
     private javax.swing.JTextField tipoExtraccion;
